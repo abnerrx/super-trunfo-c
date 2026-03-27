@@ -59,6 +59,8 @@ int main(){
     
     printf("\n"); //Pular linha.
     
+    
+    //Adição da densidade populacional e PIB per capita.
     float densidade1, densidade2;
     float pibcap1, pibcap2;
     if (area1 != 0) //Evitar divisão por 0.
@@ -77,9 +79,9 @@ int main(){
         pibcap1 = 0;
     
     if (populacao2 != 0)
-        (pib2 * 1000000000.0) / (float) populacao2;
+        pibcap2 = (pib2 * 1000000000.0) / (float) populacao2;
     else
-        pib2 = 0;
+        pibcap2 = 0;
     
 
     //Informações da primeira carta:
@@ -107,7 +109,7 @@ int main(){
     printf("Pontos turísticos: %d\n", p_turisticos2);
     printf("Densidade populacional: %.2f\n", densidade2);
     printf("PIB per capita: %.2f\n", pibcap2);
-
+   
     return 0;
 
 }
