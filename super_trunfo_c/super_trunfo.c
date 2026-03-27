@@ -6,7 +6,7 @@ int main(){
     char estado1, estado2;
     char codigo1[4], codigo2[4];
     char nome1[50], nome2[50];
-    int populacao1, populacao2;
+    unsigned long int populacao1, populacao2;
     float area1, area2;
     float pib1, pib2;
     int p_turisticos1, p_turisticos2;
@@ -86,8 +86,14 @@ int main(){
     //Super Poder:
 
     float superpoder1, superpoder2;
-    superpoder1 = (float) pibcap1 + (float) p_turisticos1 + (float) pib1 + (float) area1 + (float) populacao1 + (1.0f/densidade1);
-    superpoder2 = (float) pibcap2 + (float) p_turisticos2 + (float) pib2 + (float) area2 + (float) populacao2 + (1.0f/densidade2);
+    if (densidade1 != 0)
+            superpoder1 = (float) pibcap1 + (float) p_turisticos1 + (float) pib1 + (float) area1 + (float) populacao1 + (1.0f/densidade1);
+        else
+            superpoder1 = (float) pibcap1 + (float) p_turisticos1 + (float) pib1 + (float) area1 + (float) populacao1; //Se a densidade for 0, não é possível calcular o inverso, então o super poder é calculado sem o inverso da densidade.
+    if (densidade2 != 0)
+        superpoder2 = (float) pibcap2 + (float) p_turisticos2 + (float) pib2 + (float) area2 + (float) populacao2 + (1.0f/densidade2);
+    else
+        superpoder2 = (float) pibcap2 + (float) p_turisticos2 + (float) pib2 + (float) area2 + (float) populacao2; //Se a densidade for 0, não é possível calcular o inverso, então o super poder é calculado sem o inverso da densidade.
 
     //Informações da primeira carta:
     printf("Carta 1: \n"); 
@@ -118,57 +124,27 @@ int main(){
     printf("\n"); //Pular linha.
 
     //Comparação dos atributos:
-    printf("Comparação das cartas:\n");
-    if (populacao1 > populacao2)
-        printf("População: Carta 1 Venceu!\n");
-    else if (populacao1 < populacao2)
-        printf("População: Carta 2 Venceu!\n");
-    else
-        printf("População: Empate!\n");
-    
-    if (area1 > area2)
-        printf("Área: Carta 1 Venceu!\n");
-    else if (area1 < area2)
-        printf("Área: Carta 2 Venceu!\n");
-    else
-        printf("Área: Empate!\n");
+    printf("Comparação das cartas (1 = carta 1 vence, 0 = carta 2 vence):\n");
+    int resultado_populacao = populacao1 > populacao2;
+    int resultado_area = area1 > area2;
+    int resultado_pib = pib1 > pib2;
+    int resultado_p_turisticos = p_turisticos1 > p_turisticos2;
+    int resultado_densidade = densidade1 < densidade2;
+    int resultado_pibcap = pibcap1 > pibcap2;
+    int resultado_superpoder = superpoder1 > superpoder2;
 
-    if (pib1 > pib2)
-        printf("PIB: Carta 1 Venceu!\n");
-    else if (pib1 < pib2)
-        printf("PIB: Carta 2 Venceu!\n");
-    else
-        printf("PIB: Empate!\n");
-    
-    if (p_turisticos1 > p_turisticos2)
-        printf("Pontos turísticos: Carta 1 Venceu!\n");
-    else if (p_turisticos1 < p_turisticos2)
-        printf("Pontos turísticos: Carta 2 Venceu!\n");
-    else    
-        printf("Pontos turísticos: Empate!\n");
-    
-    if (densidade1 > densidade2)
-        printf("Densidade populacional: Carta 2 Venceu!\n");
-    else if (densidade1 < densidade2)
-        printf("Densidade populacional: Carta 1 Venceu!\n");
-    else
-        printf("Densidade populacional: Empate!\n");
-    
-    if (pibcap1 > pibcap2)
-        printf("PIB per capita: Carta 1 Venceu!\n");
-    else if (pibcap1 < pibcap2)
-        printf("PIB per capita: Carta 2 Venceu!\n");
-    else
-        printf("PIB per capita: Empate!\n");
-    
-    if (superpoder1 > superpoder2)
-        printf("Super Poder: Carta 1 Venceu!\n");
-    else if (superpoder1 < superpoder2)
-        printf("Super Poder: Carta 2 Venceu!\n");
-    else
-        printf("Super Poder: Empate!\n");
-    
-    
+    printf("População: %d\n", resultado_populacao);
+    printf("Área: %d\n", resultado_area);
+    printf("PIB: %d\n", resultado_pib);
+    printf("Pontos turísticos: %d\n", resultado_p_turisticos);
+    printf("Densidade populacional: %d\n", resultado_densidade);
+    printf("PIB per capita: %d\n", resultado_pibcap);
+    printf("Super poder: %d\n", resultado_superpoder);
+
+
+
+
+
     return 0;
 
 }
